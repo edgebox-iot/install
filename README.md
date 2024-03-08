@@ -1,0 +1,2 @@
+# install
+Edgebox Installation Script
