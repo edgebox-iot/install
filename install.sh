@@ -361,7 +361,7 @@ EOF
     echo "Edgebox is about to be installed in \"${INSTALL_PATH}\". 🚀"
     echo "If you want like to install in another location, you can specify a custom one with:"
     echo
-    echo "  curl -L https://edgebox.io/get | bash -s -- --install-path /some/path"
+    echo "  curl -L install.edgebox.io | bash -s -- --install-path /some/path"
     echo
     echo "Waiting for 10 seconds... 🕒"
     echo
