@@ -204,7 +204,7 @@ update_apt() {
 }
 
 install_apt_deps() {
-    sudo apt-get install --yes python3-pip golang jq apache2-utils restic golang
+    sudo apt-get install --yes python3-pip golang jq apache2-utils restic golang samba
 }
 
 install_avahi() {
