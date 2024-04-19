@@ -14,6 +14,7 @@ trap "sudo rm -f ${needrestart_conf_file}" EXIT
 
 # Default Installation Options
 VERBOSE_MODE="false"
+SKIP_PROMPT="false"
 UPDATE_APT="true"
 INSTALL_APT_DEPS="true"
 INSTALL_AVAHI="true"
@@ -359,15 +360,21 @@ main() {
 EOF
 
     echo "Edgebox is about to be installed in \"${INSTALL_PATH}\". 🚀"
-    echo "If you want like to install in another location, you can specify a custom one with:"
-    echo
-    echo "  curl -L install.edgebox.io | bash -s -- --install-path /some/path"
-    echo
-    echo "Waiting for 10 seconds... 🕒"
-    echo
-    echo "You may press Ctrl+C now to abort the install."
-    echo
-    sleep 10
+    
+    # Check if the user wants to skip the prompt
+    if [[ "${SKIP_PROMPT}" = "false" ]]
+    then
+        echo "If you want like to install in another location, you can specify a custom one with:"
+        echo
+        echo "  curl -L install.edgebox.io | bash -s -- --install-path /some/path"
+        echo
+        echo "Waiting for 10 seconds... 🕒"
+        echo
+        echo "You may press Ctrl+C now to abort the install."
+        echo
+        sleep 10
+    fi
+    
 
     if [[ "${CREATE_USER}" = "true" ]]
     then
