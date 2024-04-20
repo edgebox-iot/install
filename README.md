@@ -54,7 +54,7 @@ There are two categories of flags that can be passed to the script: skip flags a
 --system-password <password> # Password for the system user
 --install-path <path>        # Path to install Edgebox components
 --cluster-host <name>        # Public Hostname of the Edgebox cluster (for load balancer support configuration)
--- version <version>         # Version of Edgebox to install (default: latest)
+--version <version>          # Version of Edgebox to install (default: latest)
 ```
 
 
