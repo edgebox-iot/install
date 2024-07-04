@@ -259,11 +259,19 @@ install_sshx() {
     curl -sSf https://sshx.io/get | sh
 }
 
+checkout_latest_component_version() {
+    latest_version=$(git tag -l | sort -V | tail -1)
+    git checkout $latest_version
+}
+
 install_edgeboxctl() {
     cd $INSTALL_PATH
     git clone https://github.com/edgebox-iot/edgeboxctl.git || true
     # Setup cloud env and build edgeboxctl
     cd edgeboxctl
+
+    checkout_latest_component_version
+
     # Check if the file /home/ubuntu/cloud.env exists. If it does, copy it to /home/system/components/api
     if [ -f /home/ubuntu/cloud.env ]; then
         cp /home/ubuntu/cloud.env /home/system/components/api/cloud.env
@@ -286,6 +294,8 @@ install_edgeboxctl() {
 install_edgebox_api() {
     cd $INSTALL_PATH
     git clone https://github.com/edgebox-iot/api.git || true
+    cd api
+    checkout_latest_component_version
 
     if [ -n "${EDGEBOX_CLUSTER_HOST}" ]; then
         # build add cluster host to api conf
@@ -293,8 +303,9 @@ install_edgebox_api() {
         cd api
         touch myedgeapp.env
         echo "INTERNET_URL=$EDGEBOX_CLUSTER_HOST" >> myedgeapp.env
-        cd ..
     fi
+
+    cd ..
 }
 
 install_edgebox_ws() {
@@ -302,6 +313,7 @@ install_edgebox_ws() {
     git clone https://github.com/edgebox-iot/ws.git || true
     # Prep ws permissions
     cd ws
+    checkout_latest_component_version
     chmod 757 ws
     mkdir -p appdata
     chmod -R 777 appdata
@@ -310,18 +322,26 @@ install_edgebox_ws() {
 install_edgebox_apps() {
     cd $INSTALL_PATH
     git clone https://github.com/edgebox-iot/apps.git || true
+    cd apps
+    checkout_latest_component_version
+    cd ..
 }
 
 install_edgebox_logger() {
     cd $INSTALL_PATH
     git clone https://github.com/edgebox-iot/logger.git || true
     cd logger
+    checkout_latest_component_version
     make install
+    cd ..
 }
 
 install_edgebox_updater() {
     cd $INSTALL_PATH
     git clone https://github.com/edgebox-iot/updater.git || true
+    cd updater
+    checkout_latest_component_version
+    cd ..
 }
 
 start_services() {
