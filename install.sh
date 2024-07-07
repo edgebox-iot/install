@@ -300,7 +300,6 @@ install_edgebox_api() {
     if [ -n "${EDGEBOX_CLUSTER_HOST}" ]; then
         # build add cluster host to api conf
         # Configure Dashboard Host
-        cd api
         touch myedgeapp.env
         echo "INTERNET_URL=$EDGEBOX_CLUSTER_HOST" >> myedgeapp.env
     fi
