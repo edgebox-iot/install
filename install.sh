@@ -497,19 +497,19 @@ EOF
         
     fi
 
-    if [[ "${INSTALL_EDGEBOXCTL}" = "true" ]]
-    then
-        echo "-> 📦 Installing Edgebox Service..."
-        sleep 3
-        install_edgeboxctl
-        
-    fi
-
     if [[ "${INSTALL_EDGEBOX_API}" = "true" ]]
     then
         echo "-> 💨 Installing Edgebox API / Dashboard..."
         sleep 3
         install_edgebox_api
+        
+    fi
+
+    if [[ "${INSTALL_EDGEBOXCTL}" = "true" ]]
+    then
+        echo "-> 📦 Installing Edgebox Service..."
+        sleep 3
+        install_edgeboxctl
         
     fi
 
