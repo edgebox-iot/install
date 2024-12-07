@@ -29,6 +29,7 @@ INSTALL_EDGEBOX_WS="true"
 INSTALL_EDGEBOX_APPS="true"
 INSTALL_EDGEBOX_LOGGER="true"
 INSTALL_EDGEBOX_UPDATER="true"
+INSTALL_EDGEBOX_BROWSERDEV="true"
 CREATE_USER="true"
 ADD_MOTD="true"
 AUTO_START="true"
@@ -148,6 +149,7 @@ then
   INSTALL_EDGEBOX_APPS="false"
   INSTALL_EDGEBOX_LOGGER="false"
   INSTALL_EDGEBOX_UPDATER="false"
+  INSTALL_EDGEBOX_BROWSERDEV="false"
 fi
 
 if [[ "${arguments}" = *"--version"* ]]
@@ -332,6 +334,14 @@ install_edgebox_logger() {
     cd logger
     checkout_latest_component_version
     make install
+    cd ..
+}
+
+install_edgebox_dev() {
+    cd $INSTALL_PATH
+    git clone https://github.com/edgebox-iot/dev.git || true
+    cd dev
+    checkout_latest_component_version
     cd ..
 }
 
@@ -541,6 +551,14 @@ EOF
         echo "-> 👇 Installing Edgebox Updater..."
         sleep 3
         install_edgebox_updater
+        
+    fi
+
+    if [[ "${INSTALL_EDGEBOX_BROWSERDEV}" = "true" ]]
+    then
+        echo "-> 👇 Installing Edgebox Browserdev..."
+        sleep 3
+        install_edgebox_dev
         
     fi
 
