@@ -225,7 +225,8 @@ install_docker() {
 }
 
 install_docker_compose() {
-    sudo apt-get install --yes docker-compose
+    sudo apt-get install --yes docker-compose-v2
+    # sudo apt-get install --yes docker-compose
     # pip3 -v install docker-compose
 }
 
